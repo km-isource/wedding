@@ -1,0 +1,124 @@
+
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+	
+			
+				
+		<!-- BEGIN PAGE HEADER -->
+		<div class="page-header section-divider-bottom-1">
+			<div class="container">
+				<div class="row">
+					<div class="col center">
+						<h1 class="page-title">Messages</h1>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- END PAGE HEADER -->
+		
+			
+		<!-- BEGIN PAGE CONTENT -->
+		<div class="page-content">
+				
+			<!-- BEGIN MAIN CONTENT -->
+			<main class="main">
+				
+				<!-- BEGIN ABOUT US SECTION -->
+				<section class="no-padding-top">
+					<div class="container">
+						<div class="row">
+							<div class="col-xl-8 offset-xl-2">
+								<h2 class="title-fancy color">He asked her & she said yes!</h2>
+								<p class="center">Aenean aliquam augue turpis, in tempor elit condimentum sit amet. Phasellus a sapien tincidunt nunc dapibus mollis. Etiam ultricies bibendum sodales. Nulla libero tortor, auctor at elit ut, pharetra placerat libero. Aenean gravida in libero sed tincidunt. Nulla non mattis nisl, in imperdiet justo. Proin metus mauris, gravida vel ante et, ornare laoreet libero sed ut quam vitae.</p>
+								
+                                {% for rsvp in rsvp %}
+                                    {% if forloop.counter|divisibleby:2 %}
+                                    <div class="element-v2 photo-left">
+                                        <div class="image">
+                                            <img src="{{ media.logo.url }}" alt="Guest Picture">
+                                        </div>
+                                        <div class="info neela-style">
+                                            <div class="content">
+                                                <h3>{{ rsvp.name }}</h3>
+                                                <p>{{ rsvp.message }}</p>
+                                                <ul class="sn-icons"></ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% else %}
+                                    <div class="element-v2 photo-right">
+                                        <div class="info neela-style">
+                                            <div class="content">
+                                                <h3>{{ rsvp.name }}</h3>
+                                                <p>{{ rsvp.message }}</p>
+                                                <ul class="sn-icons"></ul>
+                                            </div>
+                                        </div>
+                                        <div class="image">
+                                            <img src="{{ media.logo.url }}" alt="Guest Picture">
+                                        </div>
+                                    </div>
+                                    {% endif %}
+                                {% endfor %}
+							</div>
+						</div>
+					</div>
+				</section>
+			</main>
+        </div>
+
+        <!-- BEGIN CONTACT FORM SECTION -->
+				<section class="section-bg-color overflow-content-over">
+					<div class="side-flowers"></div>
+					
+					<div class="container">
+						<div class="row gx-6">
+							<div class="col-xl-6 col-lg-5 overflow-image-wrapper center">
+								<h2 class="title">We're getting married !</h2>
+								<p>Phasellus a sapien tincidunt nunc dapibus mollis. Etiam ultricies bibendum sodales. Nulla libero tortor, auctor at elit ut, pharetra placerat libero. Aenean gravida in libero sed tincidunt. Nulla non mattis nisl, in imperdiet justo. Proin metus mauris, gravida vel ante et, ornare laoreet libero sed ut quam vitae. Aenean aliquam augue turpis, in tempor elit condimentum sit amet.</p>
+								<p>Aenean aliquam augue turpis, in tempor elit condimentum sit amet. Phasellus a sapien tincidunt nunc dapibus mollis. Etiam ultricies bibendum sodales. Nulla libero tortor, auctor at elit ut, pharetra placerat libero. Aenean gravida in libero sed tincidunt. Nulla non mattis nisl, in imperdiet justo.</p>
+							
+								<blockquote class="neela-quote small extra-margin">
+									Please, confirm your attendance<br>on or before 24th of July
+								</blockquote>
+								
+								
+								
+								
+							</div>
+							
+							<!-- BEGIN RSVP FORM -->
+							<div class="col-xl-6 col-lg-7">
+								<div class="form-wrapper no-shadow overflow neela-style">
+									<h2 class="section-title">Leave a Message</h2>
+
+									<form id="form-rsvp" method="post" action="{% url 'messages' %}" novalidate>
+										{% csrf_token %}
+										
+										<div class="form-floating">
+											<input type="text" name="name" id="name" placeholder="Your Name*" class="form-control required">
+											<label for="name">Your Name*</label>
+										</div>
+									
+										<div class="form-floating">
+											<textarea id="text" name="text" placeholder="Message" class="form-control" rows="4"></textarea>
+											<label for="message">Message</label>
+										</div>
+									
+										<div class="center">
+											<button type="submit" class="btn btn-primary submit_form">Send</button>
+										</div>
+									</form>
+								</div>
+							</div>
+
+							<!-- END CONTACT FORM -->
+				
+						</div>
+					</div>
+				</section>
+				<!-- END CONTACT FORM SECTION -->
+                
+
+        {% endblock%}
