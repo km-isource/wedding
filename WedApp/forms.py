@@ -4,4 +4,4 @@ from .models import RSVP
 class RSVPForm(forms.ModelForm):
     class Meta:
         model = RSVP
-        fields = ["name", "email", "phone_number", "attendance", "guest_count", "message"]
+        fields = ["name", "email", "attendance", "guest_count", "message"]

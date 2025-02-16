@@ -173,7 +173,7 @@ body {
 .navbar-nav .dropdown-submenu > a:after{
     float: left;
     border-width: 4px 4px 4px 0 ;
-    border-right-color: #73777b;
+    border-right-color: #0b1438;
     left: 8px;
 	right: auto;
 }

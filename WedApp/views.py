@@ -29,33 +29,46 @@ def home(request):
     return render(request, "home.html", context)
 
 @csrf_exempt
-def messages(request):
+def add_message(request):
     media = Media.objects.first()
     wedding = WeddingDetails.objects.first()
-    rsvp = RSVP.objects.all()
+    message = Message.objects.filter(approved=True)
     
     context = {
         "media": media,
         "wedding": wedding,
-        "rsvp": rsvp
+        "message": message
     }
     
     if request.method == "POST":
-        name = request.POST.get("name", "").strip()
-        text = request.POST.get("text", "").strip()
+        name = request.POST.get("name")
+        text = request.POST.get("text")
+        recipient = request.POST.get("recipient")
         
-        print(f"Received data: name={name}, message={text}")
         Message.objects.create(
             name=name,
             text=text,
-            
+            recipient=recipient,
         )
+        return redirect("messages")
+
+    return render(request, "add_messages.html", context)
+
+def messages(request):
+    media = Media.objects.first()
+    wedding = WeddingDetails.objects.first()
+    message = Message.objects.filter(approved=True)
+    
+    context = {
+        "media": media,
+        "wedding": wedding,
+        "message": message
+    }
 
     return render(request, "messages.html", context)
     
     
 
-@csrf_exempt
 def submit_rsvp(request):
     media = Media.objects.first()
     current_datetime = timezone.now()
@@ -67,14 +80,12 @@ def submit_rsvp(request):
     }
     
     if request.method == "POST":
-        name = request.POST.get("field0_value", "").strip()
-        email = request.POST.get("field1_value", "").strip()
-        phone_number = request.POST.get("field2_value", "").strip()
-        attendance = request.POST.get("field4_value", "").strip()
-        guest_count = request.POST.get("field5_value", "0").strip()
-        message = request.POST.get("field6_value", "").strip()
+        name = request.POST.get("name")
+        email = request.POST.get("email")
+        attendance = request.POST.get("attendance")
+        guest_count = request.POST.get("guest_count")
+        message = request.POST.get("message")
         
-        print(f"Attendance: '{attendance}'")
         
         if guest_count == "":
             guest_count = 0
@@ -84,31 +95,17 @@ def submit_rsvp(request):
         elif attendance.lower() in ["no, i will not attend", "no", "sorry, i can't come."]:
             attendance = "no"
             
-        
-        print(f"Processed Attendance: '{attendance}'")
-
-        # Validate required fields
-        if not name or not email or not phone_number or not attendance:
-            messages.error(request, "All required fields must be filled.")
-            return redirect("submit_rsvp")  # Replace with the actual RSVP page name
-
-        # Convert guest_count safely
         try:
             guest_count = int(guest_count)
         except ValueError:
             guest_count = 0
-
-        # Save RSVP entry
+            
         RSVP.objects.create(
             name=name,
             email=email,
-            phone_number=phone_number,
             attendance=attendance,
             message=message,
             guest_count=guest_count,
         )
-
-        messages.success(request, "Your RSVP has been submitted successfully!")
-        return redirect("/")  # Redirect to the same page to show messages
-
+        return redirect("home")
     return render(request, "rsvp.html", context)

@@ -48,8 +48,8 @@
 
 /* #Variables
 ================================================== */
-$color: #8eaeba;
-$text-color: #73777b;
+$color: #a2bcf5;
+$text-color: #0b1438;
 $sat-color: saturate($color, 6%);
 $color-overlay: darken($color, 33%);
 $section-bg-color: #f9f9f9;
@@ -720,36 +720,36 @@ p.center{
 
 .btn-dark {
 	color: #fff;
-	background: rgba(#73777b, 0.8);
-	border:2px solid #73777b;
+	background: rgba(#0b1438, 0.8);
+	border:2px solid #0b1438;
 
 	.h-lines {
-		border-top-color: #73777b;
-		border-bottom-color: #73777b;
+		border-top-color: #0b1438;
+		border-bottom-color: #0b1438;
 	}
 
 	.v-lines {
-		border-left-color: #73777b;
-		border-right-color: #73777b;
+		border-left-color: #0b1438;
+		border-right-color: #0b1438;
 	}
 
 	&:hover,
 	&:focus,
 	&:active {
-		background: rgba(#73777b, 0.1);
-		border-color:#73777b;
-		color: #73777b;
+		background: rgba(#0b1438, 0.1);
+		border-color:#0b1438;
+		color: #0b1438;
 	}
 
 	&:active:focus {
-		@include box-shadow(0 0 0 .25rem rgba(#73777b, 0.2));
+		@include box-shadow(0 0 0 .25rem rgba(#0b1438, 0.2));
 	}
 
 	&.disabled,
 	&:disabled{
-		background: rgba(#73777b, 0.1);
-		border-color:#73777b;
-		color: #73777b;
+		background: rgba(#0b1438, 0.1);
+		border-color:#0b1438;
+		color: #0b1438;
 
 		.h-lines {
 		  transform: scaleX(0);

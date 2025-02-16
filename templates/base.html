@@ -59,9 +59,9 @@
 				<path d="M462.3 62.6C407.5 15.9 326 24.3 275.7 76.2L256 96.5l-19.7-20.3C186.1 24.3 104.5 15.9 49.7 62.6c-62.8 53.6-66.1 149.8-9.9 207.9l193.5 199.8c12.5 12.9 32.8 12.9 45.3 0l193.5-199.8c56.3-58.1 53-154.3-9.8-207.9z" />
 			</svg>
 			<div class="preloader-title">
-				{{wedding.bride}}<br>
+				<span style="font-size: 20px;">{{wedding.bride}}</span><br>
 				<small>&</small><br>
-				{{wedding.groom}}
+				<span style="font-size: 20px;">{{wedding.groom}}</span>
 			</div>
 		</div>
 	</div>
@@ -111,7 +111,7 @@
 <!-- BEGIN WEDDING LOCATION SECTION -->
 <div id="location">
     
-    <br> <br> <br>
+    <br> <br> <br> <br>
     <div class="map_pins_full">
         <ul class="pins">
             
@@ -129,39 +129,7 @@
 
 		<!-- BEGIN FOOTER -->
 		<footer id="footer">
-			<div class="footer-widget-area">
-				<div class="container">
-					<div class="row">
-						<div class="col-md-4">
-							<div class="widget widget-contact-info">
-								
-								<ul class="contact-info">
-									<li><span>Phone:</span> {{wedding.phone_number}}</li>
-									<li><span>E-mail:</span> <a href="mailto:{{wedding.email}}">{{wedding.email}}</a></li>
-								</ul>
-								
-							</div>
-						</div>
-						
-						<div class="col-md-4">
-							
-						</div>
-						
-						<div class="col-md-4">
-							<div class="widget widget-quick-links">
-								<h2 class="widget-title">Quick Links</h2>
-								
-								<ul>
-									<li><a href="{% url 'home' %}">Home</a></li>
-									<li><a href="{% url 'index'%}">Wedding Details</a></li>
-									<li><a href="{% url 'submit_rsvp' %}">Confirm Attendance</a></li>
-									
-								</ul>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
+			
 		
 			<div class="copyright">
 				<div class="container">

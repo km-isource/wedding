@@ -62,10 +62,11 @@
 				<path d="M462.3 62.6C407.5 15.9 326 24.3 275.7 76.2L256 96.5l-19.7-20.3C186.1 24.3 104.5 15.9 49.7 62.6c-62.8 53.6-66.1 149.8-9.9 207.9l193.5 199.8c12.5 12.9 32.8 12.9 45.3 0l193.5-199.8c56.3-58.1 53-154.3-9.8-207.9z" />
 			</svg>
 			<div class="preloader-title">
-				{{wedding.bride}}<br>
+				<span style="font-size: 20px;">{{wedding.bride}}</span><br>
 				<small>&</small><br>
-				{{wedding.groom}}
+				<span style="font-size: 20px;">{{wedding.groom}}</span>
 			</div>
+			
 		</div>
 	</div>
 	<!-- END PRELOADER -->
@@ -80,7 +81,7 @@
 				<div class="container">
 					<div class="row">
 						<div class="col-sm-12">
-							<a href="index.html" class="nav-logo"><img src="{{ media.logo.url }}" alt="Logo" /></a>
+							<a href="{% url 'home' %}" class="nav-logo"><img src="{{ media.logo.url }}" alt="Logo" /></a>
 							
 							<!-- BEGIN MAIN MENU -->
 							<nav class="navbar">
@@ -152,7 +153,8 @@
 						Use the data attribute "date" to set the countdown date. 
 						E.g.: data-date="2022/09/20 3:00 PM"
                         -->
-						<div class="countdown" data-date="2025/03/29 10:00 AM"></div>
+						<div class="countdown" data-date="{{wedding.date|date:"Y-m-d"}} {{wedding.ceremony_time|time:"g:i A"}}" data-animation-direction="from-bottom" data-animation-delay="800"> </div>
+
 					</div>
 					</div>
 				</div>
@@ -170,13 +172,14 @@
 						<div class="col overflow-image-wrapper">
 						
 							<div class="overflow-image-text extra-padding-top">
-								<h2 class="title">He asker her & she said yes!</h2>
-								<p class="center">Phasellus a sapien tincidunt nunc dapibus mollis. Etiam ultricies bibendum sodales. Nulla libero tortor, auctor at elit ut, pharetra placerat libero. Aenean gravida in libero sed tincidunt. Nulla non mattis nisl, in imperdiet justo. Proin metus mauris, gravida vel ante et, ornare laoreet libero sed ut quam vitae. Aenean aliquam augue turpis, in tempor elit condimentum sit amet. Aenean aliquam augue turpis, in tempor elit condimentum sit amet. Phasellus a sapien tincidunt nunc dapibus mollis. Etiam ultricies bibendum sodales.</p>
-								<p class="center"><a class="btn btn-primary" href="about-us.html">Our Love Story</a></p>
+								<h2 class="title">He asker her & she said yes! <br>
+									<p style="font-size: 20px;"> Ecclesiastes 4:9-12</p></h2>
+								<p class="center">Two are better than one, because they have a good return for their labor. If either of them falls down, one can help the other up. But pity anyone who falls and has no one to help them up. A cord of three strands is not quickly broken.</p>
+								<!--<p class="center"><a class="btn btn-primary" href="about-us.html">Our Love Story</a></p> -->
 							</div>
 							
 							<div class="overflow-image flower">
-								<img src="{{ media.logo.url }}" alt="Couple Photo">
+								<img src="{{ media.bride_n_groom.url }}" alt="Couple Photo">
 							</div>
 						</div>
 					</div>
@@ -216,7 +219,7 @@
                                     Save<small>the</small>Date
                                         {% elif wedding.date|date:"Y-m-d" == today_date %}
                                             {% if wedding.ceremony_time|time:"H:i" > current_time %}
-                                            It's Today
+                                            It's <br> Today
                                             {% else %}
                                             We<small>did</small>It
                                             {% endif %}
@@ -239,8 +242,8 @@
                                     {% endif %}
                                 {% endif %}
 								
-								<div class="date">On September 24, 2022<small>at 03:00 pm</small></div>
-								<div class="uppercase">At Birchwood Church<br>4181 Birchwood Ave Seal Beach, CA</div>
+								<div class="date">{{wedding.date|date}}<small>at {{wedding.ceremony_time}}</small></div>
+								<div class="uppercase">{{wedding.ceremony_venue}}<br>{{wedding.ceremony_location}}</div>
 								
 								
 							</div>
@@ -259,22 +262,22 @@
 					<div class="col-md-4 wedding-details light">
 						<br>
 						<i class="fa-solid fa-church fa-lg"></i>
-						<h4>Ceremony<small>03:00 PM - 04:00 PM</small></h4>
-						<p>BIRCHWOOD CHURCH<br>4181 Birchwood Ave Seal Beach, CA<br>33.776825, -118.059113</p>
+						<h4>Ceremony<small> 10:00 AM - 1:00 PM</small></h4>
+						<p>{{wedding.ceremony_venue}}<br>{{wedding.ceremony_location}}</p>
 					</div>
 					
 					<div class="col-md-4 wedding-details light">
 						<br>
 						<i class="fa-solid fa-champagne-glasses fa-lg"></i>
-						<h4>Reception<small>07:00 PM - 01:00 PM</small></h4>
-						<p>OLD RANCH COUNTRY CLUB<br>29033 West Lake Drive, Agoura Hills, CA<br>33.776025, -118.065314</p>
+						<h4>Reception<small>02:00 PM - 04:30 PM</small></h4>
+						<p>{{wedding.reception_name}}<br>{{wedding.reception_location}}</p>
 					</div>
 
 					<div class="col-md-4 wedding-details light">
 						<br>
 						<i class="fa-solid fa-clipboard-user fa-lg"></i>
-						<h4>Coming?<small>PLEASE</small></h4>
-						<p>CONFIRM YOUR ATTENDANCE<br>ON OR BEFORE 25th OF MARCH </p>
+						<h4>Coming?<small> <br> PLEASE <br> CONFIRM YOUR ATTENDANCE<br>ON OR BEFORE 25th OF MARCH</small></h4>
+						
 						<a href="{% url 'submit_rsvp' %}" class="btn btn-light">RSVP</a>
 					</div>
 					
@@ -284,8 +287,44 @@
 		</section>
 		<!-- END WEDDING DETAILS SECTION -->
 		
+
 		<!-- BEGIN WEDDING LOCATION SECTION -->
+		<section id="location">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-12">
+						<h2 class="section-title">Location</h2>
+					</div>
+				</div>
+			</div>
+			
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12 col-xl-10 offset-xl-1">							
+							<div class="map-wrapper" data-animation-direction="fade" data-animation-delay="100">
+								<div class="mapouter">
+									<div class="gmap_canvas">
+										<iframe class="gmap_iframe"
+										width="100%" frameborder="0"
+										scrolling="no"
+										marginheight="0"
+										marginwidth="0"
+										src="https://maps.google.com/maps?width=600&amp;height=400&amp;hl=en&amp;q=ack st francis karen&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed">
+									</iframe>
+									<a href="https://sprunkin.com/">Maps</a>
+								</div>
+							
+							</div>
+						</div>
+						
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- END WEDDING LOCATION SECTION -->
+		
 		<div id="location">
+    
 			
 			<div class="map_pins_full">
 				<ul class="pins">
@@ -293,57 +332,25 @@
 				</ul>
 			</div>
 		</div>
-		<!-- END WEDDING LOCATION SECTION -->
-		
 		
 		
 		<!-- BEGIN FOOTER -->
 		<footer id="footer">
-			<div class="footer-widget-area">
-				<div class="container">
-					<div class="row">
-						<div class="col-md-4">
-							<div class="widget widget-contact-info">
-								
-								<ul class="contact-info">
-									<li><span>Phone:</span> {{wedding.phone_number}}</li>
-									<li><span>E-mail:</span> <a href="mailto:{{wedding.email}}">{{wedding.email}}</a></li>
-								</ul>
-								
-							</div>
-						</div>
-						
-						<div class="col-md-4">
-							
-						</div>
-						
-						<div class="col-md-4">
-							<div class="widget widget-quick-links">
-								<h2 class="widget-title">Quick Links</h2>
-								
-								<ul>
-									<li><a href="{% url 'home' %}">Home</a></li>
-									<li><a href="{% url 'index'%}">Wedding Details</a></li>
-									<li><a href="{% url 'submit_rsvp' %}">Confirm Attendance</a></li>
-									
-								</ul>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
+			
 		
 			<div class="copyright">
 				<div class="container">
 					<div class="row">
 						<div class="col-sm-12">
-							&copy; <span id="current-year"></span> 
-							<a href="{% url 'home' %}">{{wedding.bride}} & {{wedding.groom}}</a>, 
+							&nbsp; 📞 {{wedding.groom}}: <a href="tel:{{ wedding.groom_phone_number }}">{{ wedding.groom_phone_number }}</a>    {{wedding.bride}}: <a href="tel:{{ wedding.bride_phone_number }}">{{ wedding.bride_phone_number }}</a>   <br> 
+							&copy; <span id="current-year"></span>
+							<a href="{% url 'home' %}">{{ wedding.bride }} & {{ wedding.groom }}</a>, 
 							<span id="current-day-date-time"></span>, All Rights Reserved.
 						</div>
 					</div>
 				</div>
 			</div>
+			
 		</footer>
 		<!-- END FOOTER -->
 		
@@ -352,7 +359,6 @@
 	
 	
 	<!-- Google Maps API and Map Richmarker Library -->
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBHOXsTqoSDPQ5eC5TChvgOf3pAVGapYog"></script>
 	<script src="{% static 'js/richmarker.js' %}"></script>
 
     <!-- Libs -->
@@ -397,6 +403,30 @@
 			background-size: cover;
 			background-position: center;
 		}
+
+		.mapouter {
+			position: relative;
+			width: 100%;
+			max-width: 1200px; /* Increase max width */
+			height: 500px; /* Increase height */
+			margin: 0 auto; /* Center the map */
+			display: flex;
+			justify-content: center; /* Ensure map is centered */
+			align-items: center;
+		}
+		
+		.gmap_canvas {
+			overflow: hidden;
+			background: none !important;
+			width: 100%;
+			height: 100%;
+		}
+		
+		.gmap_iframe {
+			width: 100% !important;
+			height: 100% !important;
+		}
+		
 	</style>
 	
 </body>
