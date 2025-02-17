@@ -135,13 +135,15 @@
 				<div class="container">
 					<div class="row">
 						<div class="col-sm-12">
-							&copy; <span id="current-year"></span> 
-							<a href="{% url 'home' %}">{{wedding.bride}} & {{wedding.groom}}</a>, 
+							&nbsp; 📞 {{wedding.groom}}: <a href="tel:{{ wedding.groom_phone_number }}">{{ wedding.groom_phone_number }}</a>    {{wedding.bride}}: <a href="tel:{{ wedding.bride_phone_number }}">{{ wedding.bride_phone_number }}</a>   <br> 
+							&copy; <span id="current-year"></span>
+							<a href="{% url 'home' %}">{{ wedding.bride }} & {{ wedding.groom }}</a>, 
 							<span id="current-day-date-time"></span>, All Rights Reserved.
 						</div>
 					</div>
 				</div>
 			</div>
+			
 		</footer>
 		<!-- END FOOTER -->
 		
