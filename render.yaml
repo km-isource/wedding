@@ -1,0 +1,7 @@
+services:
+- type: web
+  name: wedding
+  plan: free
+  runtime: python
+  buildCommand: "./build.sh"
+  startCommand: "gunicorn Wedding.wsgi:application --timeout 300 --workers=3 --threads=3"
